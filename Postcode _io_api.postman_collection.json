@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "f7ea801e-53a1-4daa-9fa4-b575cd290801",
+		"name": "Postcode _io_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get random postcodes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee822f7e-9e4c-43ef-b45a-f4e05f73f764",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"latitude not to be null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.latitude).to.not.to.be.null;",
+							"});",
+							"",
+							"pm.test(\"longitude not to be null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.longitude).to.not.be.null;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{postcode_io_host}}/random/postcodes",
+					"host": [
+						"{{postcode_io_host}}"
+					],
+					"path": [
+						"random",
+						"postcodes"
+					]
+				},
+				"description": "to get a random postcode"
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup a postcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8d34c2c0-988f-4ec2-9df4-0484596f7841",
+						"exec": [
+							"//testcase:1",
+							"",
+							"pm.test(\"when searched for lat,long the Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//testcase:2",
+							"",
+							"pm.test(\"check postcode value in results\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.postcode).to.eql(\"RM17 6EY\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"quality\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.quality).to.eql(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"country\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.country).to.eql(\"England\");",
+							"});",
+							"",
+							"//to validate inside element and sub elements",
+							"",
+							"pm.test(\"parliamentary_constituency\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.codes.parliamentary_constituency).to.eql(\"E14000995\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"nuts\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.codes.nuts).to.eql(\"UKH32\");",
+							"});",
+							"",
+							"//make sure dynamic values like lat and long shold not be null",
+							"",
+							"pm.test(\"longitude\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.longitude).to.not.be.null;",
+							"});",
+							"",
+							"pm.test(\"latitude\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result.latitude).to.not.be.null;",
+							"});",
+							"",
+							"//make sure ",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{postcode_io_host}}/postcodes/RM17 6EY",
+					"host": [
+						"{{postcode_io_host}}"
+					],
+					"path": [
+						"postcodes",
+						"RM17 6EY"
+					]
+				},
+				"description": "postcode IO, getting latitude and longitude of a particular postcode "
+			},
+			"response": []
+		},
+		{
+			"name": "Bulk lookup postcodes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e393acd-c9db-43b2-8ff0-3148b31a63ef",
+						"exec": [
+							"//validates ststus code to be 200",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate  correct poastcode [0]  OX49 5NU",
+							"",
+							"pm.test(\"postcode validation for [0]\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result[0].result.postcode).to.eql(\"OX49 5NU\");",
+							"});",
+							"",
+							"//validate correct post code [1]  \"M32 0JG\"",
+							"",
+							"pm.test(\"postcode validation for [1]\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result[1].result.postcode).to.eql(\"M32 0JG\");",
+							"});",
+							"",
+							"//validate correct post code [2]  \"NE30 1DP\"",
+							"",
+							"pm.test(\"postcode validation for [2]\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result[2].result.postcode).to.eql(\"NE30 1DP\");",
+							"});",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"postcodes\" : [\"OX49 5NU\", \"M32 0JG\", \"NE30 1DP\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{postcode_io_host}}/postcodes",
+					"host": [
+						"{{postcode_io_host}}"
+					],
+					"path": [
+						"postcodes"
+					]
+				},
+				"description": "fetching value for multiple poastcodes"
+			},
+			"response": []
+		},
+		{
+			"name": "validate a postcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6692cb9a-a2a4-4a29-b3e4-b7d932bdd7f0",
+						"exec": [
+							"//To validate the postcode is exsiting",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//to validate the result is true",
+							"",
+							"pm.test(\"result is true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{postcode_io_host}}/postcodes/rm17 6e/validate",
+					"host": [
+						"{{postcode_io_host}}"
+					],
+					"path": [
+						"postcodes",
+						"rm17 6e",
+						"validate"
+					]
+				},
+				"description": "to validate a postcode"
+			},
+			"response": []
+		},
+		{
+			"name": "Get nearest postcodes for longitude & latitude",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a2cfdae6-2514-4a74-a654-c5f82901a6b2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate if postcode is RM176EY",
+							"",
+							"pm.test(\"check postcode for [0] value in results\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result[0].postcode).to.eql(\"RM17 6EY\");",
+							"});",
+							"",
+							"pm.test(\"nuts for [0]\" , function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result[0].codes.nuts).to.eql(\"UKH32\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{postcode_io_host}}/postcodes?lon=0.3423:longitude&lat=51.4769:latitude\n",
+					"host": [
+						"{{postcode_io_host}}"
+					],
+					"path": [
+						"postcodes"
+					],
+					"query": [
+						{
+							"key": "lon",
+							"value": "0.3423:longitude"
+						},
+						{
+							"key": "lat",
+							"value": "51.4769:latitude\n"
+						}
+					]
+				},
+				"description": "Get nearest postcodes for a given longitude & latitude"
+			},
+			"response": []
+		},
+		{
+			"name": "Bulk Reverse Geocoding",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "edfa4867-7267-49f6-9434-5b12b021f0bc",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"contains postcode CM8 1EF\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result[0].result[0].postcode).to.eql(\"CM8 1EF\");",
+							"});",
+							"",
+							"pm.test(\"contains postcode M46 9XF\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.result[1].result[1].postcode).to.eql(\"M46 9XF\");",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"geolocations\": [\n        {\n            \"longitude\": 0.629834723775309,\n            \"latitude\": 51.7923246977375\n        },\n        {\n            \"longitude\": -2.49690382054704,\n            \"latitude\": 53.5351312861402,\n            \"radius\": 1000,\n            \"limit\": 5\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{postcode_io_host}}/postcodes",
+					"host": [
+						"{{postcode_io_host}}"
+					],
+					"path": [
+						"postcodes"
+					]
+				},
+				"description": "Bulk Reverse Geocoding"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2e774554-372d-4ef6-a5c9-757d32bbaf75",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a1a8270e-291d-4143-a916-3155315ef5ad",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
