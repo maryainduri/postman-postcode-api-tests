@@ -4,10 +4,9 @@
   "description": "Postcode IO API postman tests",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:test": "newman run Postcode_io_api.postman_collection.json -e environments/dev.postman_environment.json",
-    "stage:test": "newman run Postcode_io_api.postman_collection.json -e environments/stage.postman_environment.json",
-    "prod:test": "newman run Postcode_io_api.postman_collection.json -e environments/prod.postman_environment.json"
+    "dev:test": "newman run Postcode_io_api.postman_collection.json -e environments/dev.postman_environment.json -r htmlextra",
+    "stage:test": "newman run Postcode_io_api.postman_collection.json -e environments/stage.postman_environment.json -r htmlextra",
+    "prod:test": "newman run Postcode_io_api.postman_collection.json -e environments/prod.postman_environment.json -r htmlextra"
   },
   "author": "MaryaManju Induri",
   "license": "ISC",
@@ -28,5 +27,8 @@
   "homepage": "https://github.com/maryainduri/postman-postcode-api-tests#readme",
   "devDependencies": {
     "newman": "^5.2.0"
+  },
+  "dependencies": {
+    "newman-reporter-htmlextra": "^1.19.4"
   }
 }

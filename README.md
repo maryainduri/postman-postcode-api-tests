@@ -19,5 +19,16 @@ The easiest way to install Newman is using NPM. If you have Node.js installed, i
 
 ```npm run dev:test```
 
+## Reporting
+
+Install [Newman HTML reporter](https://www.npmjs.com/package/newman-reporter-htmlextra)
+
+```npm install -g newman-reporter-htmlextra```
+
+> HTML report generated under newman folder
+
+![alt text](docs/newman-report.png)
+
+
 ## contact
 [marya.induri@gmail.com](marya.induri@gmail.com)
