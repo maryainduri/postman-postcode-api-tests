@@ -1,0 +1,26 @@
+{
+  "name": "postcode-io-postman-tests",
+  "version": "1.0.0",
+  "description": "Postcode IO API postman tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MaryaManju Induri",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maryainduri/postman-postcode-api-tests.git"
+  },
+  "keywords": [
+    "Postman",
+    "Newman",
+    "PostcodeIO",
+    "APItests",
+    "RESTAPI"
+  ],
+  "bugs": {
+    "url": "https://github.com/maryainduri/postman-postcode-api-tests/issues"
+  },
+  "homepage": "https://github.com/maryainduri/postman-postcode-api-tests#readme"
+}
