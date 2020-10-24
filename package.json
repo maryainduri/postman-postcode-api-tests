@@ -4,7 +4,10 @@
   "description": "Postcode IO API postman tests",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:test": "newman run Postcode_io_api.postman_collection.json -e environments/dev.postman_environment.json",
+    "stage:test": "newman run Postcode_io_api.postman_collection.json -e environments/stage.postman_environment.json",
+    "prod:test": "newman run Postcode_io_api.postman_collection.json -e environments/prod.postman_environment.json"
   },
   "author": "MaryaManju Induri",
   "license": "ISC",
