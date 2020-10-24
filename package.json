@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/maryainduri/postman-postcode-api-tests/issues"
   },
-  "homepage": "https://github.com/maryainduri/postman-postcode-api-tests#readme"
+  "homepage": "https://github.com/maryainduri/postman-postcode-api-tests#readme",
+  "devDependencies": {
+    "newman": "^5.2.0"
+  }
 }
